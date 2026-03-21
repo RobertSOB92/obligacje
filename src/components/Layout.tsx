@@ -29,12 +29,14 @@ export function Layout({ formPanel, chartPanel }: LayoutProps) {
         </div>
       </header>
 
+      <div className="h-16 sm:h-24" aria-hidden="true" />
+
       {/* Main content */}
-      <main className="flex-1 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+      <main className="flex-1 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-6 sm:pb-8">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
           {/* Form panel */}
-          <section className="lg:col-span-4 xl:col-span-3">
-            <div className="rounded-xl border border-slate-700/50 bg-slate-900/50 backdrop-blur-sm p-5 sm:p-6 shadow-xl sticky top-20">
+          <section className="lg:col-span-4 xl:col-span-3 lg:flex">
+            <div className="rounded-xl border border-slate-700/50 bg-slate-900/50 backdrop-blur-sm p-5 sm:p-6 shadow-xl lg:flex-1 flex flex-col h-full">
               <h2 className="text-base font-semibold text-slate-200 mb-4 flex items-center gap-2">
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.066 2.573c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.573 1.066c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.066-2.573c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
@@ -42,7 +44,9 @@ export function Layout({ formPanel, chartPanel }: LayoutProps) {
                 </svg>
                 Parametry inwestycji
               </h2>
-              {formPanel}
+              <div className="flex-1 min-h-0">
+                {formPanel}
+              </div>
             </div>
           </section>
 
