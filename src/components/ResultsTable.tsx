@@ -25,30 +25,32 @@ export function ResultsTable({ data }: ResultsTableProps) {
         Szczegółowe zestawienie roczne
       </h3>
 
-      <div className="overflow-x-auto rounded-lg border border-slate-700/50">
-        <table className="w-full text-sm text-slate-300">
+      <div className="overflow-x-auto rounded-xl border border-slate-700/40 bg-slate-900/20 backdrop-blur-sm">
+        <table className="w-full text-sm text-slate-400 border-collapse">
           <thead>
-            <tr className="bg-slate-800/80 text-slate-200">
-              <th className="px-4 py-3 text-left font-semibold">Rok</th>
-              <th className="px-4 py-3 text-right font-semibold">Wpłacony Kapitał</th>
-              <th className="px-4 py-3 text-right font-semibold">Zysk Netto</th>
-              <th className="px-4 py-3 text-right font-semibold">Wartość Portfela</th>
+            <tr className="bg-indigo-500/10 text-slate-200 border-b border-slate-700/50">
+              <th className="px-6 py-4 text-center font-bold uppercase tracking-wider text-xs text-indigo-300/80">Rok</th>
+              <th className="px-6 py-4 text-center font-bold uppercase tracking-wider text-xs text-indigo-300/80">Wpłacony Kapitał</th>
+              <th className="px-6 py-4 text-center font-bold uppercase tracking-wider text-xs text-emerald-400/80">Zysk Netto</th>
+              <th className="px-6 py-4 text-center font-bold uppercase tracking-wider text-xs text-slate-200">Wartość Portfela</th>
             </tr>
           </thead>
-          <tbody>
-            {data.map((row, index) => (
+          <tbody className="divide-y divide-slate-800/50">
+            {data.map((row) => (
               <tr
                 key={row.year}
-                className={
-                  index % 2 === 0
-                    ? 'bg-slate-900/30'
-                    : 'bg-slate-800/20'
-                }
+                className="group hover:bg-indigo-500/5 transition-colors duration-150"
               >
-                <td className="px-4 py-2.5 font-medium text-slate-200">{row.year}</td>
-                <td className="px-4 py-2.5 text-right tabular-nums">{formatPLN(row.zainwestowanyKapital)}</td>
-                <td className="px-4 py-2.5 text-right tabular-nums text-emerald-400">{formatPLN(row.zyskNetto)}</td>
-                <td className="px-4 py-2.5 text-right tabular-nums font-semibold text-slate-100">
+                <td className="px-6 py-3.5 text-center font-semibold text-indigo-400/90 bg-indigo-500/5">
+                  {row.year}
+                </td>
+                <td className="px-6 py-3.5 text-center tabular-nums text-slate-300 group-hover:text-indigo-200 transition-colors">
+                  {formatPLN(row.zainwestowanyKapital)}
+                </td>
+                <td className="px-6 py-3.5 text-center tabular-nums font-medium text-emerald-400/90 group-hover:text-emerald-400 transition-colors">
+                  {formatPLN(row.zyskNetto)}
+                </td>
+                <td className="px-6 py-3.5 text-center tabular-nums font-bold text-slate-100 bg-white/5">
                   {formatPLN(row.zainwestowanyKapital + row.zyskNetto)}
                 </td>
               </tr>
