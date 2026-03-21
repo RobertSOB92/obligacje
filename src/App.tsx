@@ -3,6 +3,7 @@
 import { Layout } from './components/Layout';
 import { InputPanel } from './components/InputPanel';
 import { ResultsChart } from './components/ResultsChart';
+import { ResultsTable } from './components/ResultsTable';
 import { useCalculator } from './hooks/useCalculator';
 
 export default function App() {
@@ -19,6 +20,7 @@ export default function App() {
         />
       }
       chartPanel={<ResultsChart data={results} />}
+      tablePanel={<ResultsTable data={results} />}
     />
   );
 }

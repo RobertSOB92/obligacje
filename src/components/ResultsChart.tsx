@@ -76,7 +76,7 @@ export function ResultsChart({ data }: ResultsChartProps) {
   const maxValue = Math.max(...data.map((d) => d.zainwestowanyKapital + d.zyskNetto));
 
   return (
-    <div className="w-full h-full min-h-[400px]">
+    <div className="w-full h-[450px]">
       <ResponsiveContainer width="100%" height="100%">
         <BarChart
           data={data}
