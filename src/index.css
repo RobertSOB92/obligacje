@@ -1,5 +1,12 @@
 @import "tailwindcss";
 
+@layer utilities {
+  .backdrop-blur-safari {
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+  }
+}
+
 :root {
   --color-primary: #0f172a;
   --color-accent: #3b82f6;

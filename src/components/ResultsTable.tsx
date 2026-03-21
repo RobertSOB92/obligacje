@@ -25,32 +25,32 @@ export function ResultsTable({ data }: ResultsTableProps) {
         Szczegółowe zestawienie roczne
       </h3>
 
-      <div className="overflow-x-auto rounded-xl border border-slate-700/40 bg-slate-900/20 backdrop-blur-sm">
-        <table className="w-full text-sm text-slate-400 border-collapse">
+      <div className="overflow-x-auto">
+        <table className="w-full text-sm border-collapse">
           <thead>
-            <tr className="bg-indigo-500/10 text-slate-200 border-b border-slate-700/50">
-              <th className="px-6 py-4 text-center font-bold uppercase tracking-wider text-xs text-indigo-300/80">Rok</th>
-              <th className="px-6 py-4 text-center font-bold uppercase tracking-wider text-xs text-indigo-300/80">Wpłacony Kapitał</th>
-              <th className="px-6 py-4 text-center font-bold uppercase tracking-wider text-xs text-emerald-400/80">Zysk Netto</th>
-              <th className="px-6 py-4 text-center font-bold uppercase tracking-wider text-xs text-slate-200">Wartość Portfela</th>
+            <tr className="bg-indigo-950/60 text-indigo-100 border-b border-indigo-500/30">
+              <th className="px-6 py-4 text-center font-bold uppercase tracking-wider text-xs">Rok</th>
+              <th className="px-6 py-4 text-center font-bold uppercase tracking-wider text-xs">Wpłacony Kapitał</th>
+              <th className="px-6 py-4 text-center font-bold uppercase tracking-wider text-xs text-emerald-400">Zysk Netto</th>
+              <th className="px-6 py-4 text-center font-bold uppercase tracking-wider text-xs">Wartość Portfela</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-slate-800/50">
+          <tbody className="divide-y divide-slate-800/40">
             {data.map((row) => (
               <tr
                 key={row.year}
-                className="group hover:bg-indigo-500/5 transition-colors duration-150"
+                className="group hover:bg-slate-800/40 transition-colors duration-150"
               >
-                <td className="px-6 py-3.5 text-center font-semibold text-indigo-400/90 bg-indigo-500/5">
+                <td className="px-6 py-4 text-center font-bold text-indigo-400">
                   {row.year}
                 </td>
-                <td className="px-6 py-3.5 text-center tabular-nums text-slate-300 group-hover:text-indigo-200 transition-colors">
+                <td className="px-6 py-4 text-center tabular-nums text-slate-300 group-hover:text-white transition-colors">
                   {formatPLN(row.zainwestowanyKapital)}
                 </td>
-                <td className="px-6 py-3.5 text-center tabular-nums font-medium text-emerald-400/90 group-hover:text-emerald-400 transition-colors">
+                <td className="px-6 py-4 text-center tabular-nums font-semibold text-emerald-400 group-hover:text-emerald-300 transition-colors">
                   {formatPLN(row.zyskNetto)}
                 </td>
-                <td className="px-6 py-3.5 text-center tabular-nums font-bold text-slate-100 bg-white/5">
+                <td className="px-6 py-4 text-center tabular-nums font-bold text-slate-100">
                   {formatPLN(row.zainwestowanyKapital + row.zyskNetto)}
                 </td>
               </tr>
