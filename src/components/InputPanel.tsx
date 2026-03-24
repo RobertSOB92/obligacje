@@ -71,7 +71,7 @@ function NumericalInput({
         onChange={handleChange}
         onFocus={(e) => e.target.select()}
         placeholder="0"
-        className="w-full rounded-lg border border-slate-600 bg-slate-800/60 px-4 py-2.5 text-slate-100
+        className="w-full max-w-[280px] rounded-lg border border-slate-600 bg-slate-800/60 px-4 py-2.5 text-slate-100
                    placeholder-slate-500 outline-none transition-all
                    focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20"
       />
@@ -81,8 +81,8 @@ function NumericalInput({
 
 export function InputPanel({ form, needsInflation, needsNBP, onUpdate }: InputPanelProps) {
   return (
-    <div className="h-full flex flex-col gap-4">
-      <div className="flex-1 min-h-0 flex flex-col justify-between gap-4">
+    <div className="h-full flex flex-col" style={{ padding: '24px' }}>
+      <div className="flex-1 min-h-0 flex flex-col justify-between" style={{ gap: '20px' }}>
         {/* Monthly payment */}
         <NumericalInput
           id="monthlyPayment"
@@ -112,7 +112,7 @@ export function InputPanel({ form, needsInflation, needsNBP, onUpdate }: InputPa
             id="bondType"
             value={form.bondId}
             onChange={(e) => onUpdate('bondId', e.target.value)}
-            className="w-full rounded-lg border border-slate-600 bg-slate-800/60 px-4 py-2.5 text-slate-100
+            className="w-full max-w-[280px] rounded-lg border border-slate-600 bg-slate-800/60 px-4 py-2.5 text-slate-100
                        outline-none transition-all cursor-pointer
                        focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 shadow-sm"
           >
@@ -187,7 +187,7 @@ export function InputPanel({ form, needsInflation, needsNBP, onUpdate }: InputPa
       </div>
 
       {/* Summary box */}
-      <div className="rounded-lg bg-indigo-500/5 border border-indigo-500/20 p-4 backdrop-blur-safari">
+      <div className="rounded-xl bg-indigo-500/5 border border-indigo-500/20 backdrop-blur-safari" style={{ padding: '20px', marginTop: '24px' }}>
         <p className="text-xs uppercase tracking-wider text-indigo-400/80 mb-2 font-bold">Podsumowanie wejść</p>
         <div className="grid grid-cols-2 gap-y-1 text-sm">
           <span className="text-slate-400">Wpłata / miesiąc:</span>
