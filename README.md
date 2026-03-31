@@ -1,91 +1,46 @@
-# React + TypeScript + Vite
+# Kalkulator Obligacji Skarbowych (PL)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A simple web app (React + TypeScript + Vite) that **simulates regular investing in Polish Treasury Bonds** (“Obligacje Skarbowe”) and shows how your portfolio can grow over time.
 
-Currently, two official plugins are available:
+The calculator is designed for **cyclical saving**: you enter a monthly payment, choose a bond type, and the app simulates purchases, interest, tax (or IKE), and optional reinvestment.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## What this app does
 
-## React Compiler
+- Simulates investing **every month** (e.g. 500 PLN/month) for a chosen number of years
+- Supports multiple Polish bond types (configured in `src/config/bonds.ts`), including:
+  - **OTS (3-month)**
+  - **ROR (1-year, variable NBP)**
+  - **DOR (2-year, variable NBP)**
+  - **DOS (2-year fixed)**
+  - **TOZ (3-year, variable NBP)**
+  - **COI (4-year, inflation-indexed)**
+  - **EDO (10-year, inflation-indexed)**
+- Lets you input assumptions when needed:
+  - **Inflation rate** (for inflation-indexed bonds like COI/EDO)
+  - **NBP reference rate** (for variable-rate bonds like ROR/DOR/TOZ)
+- Optionally simulates:
+  - **IKE mode** (no 19% capital gains tax in the simulation)
+  - **Reinvesting profits/interest** into additional bond purchases
+- Displays results as:
+  - A chart (portfolio value vs net profit)
+  - A detailed yearly table (invested capital, net profit, total value)
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## How the simulation works (high level)
 
-## Expanding the ESLint configuration
+- You deposit money monthly.
+- Whenever enough cash accumulates, the app “buys” bonds in 100 PLN denominations.
+- Interest is computed according to the selected bond rules (fixed / NBP-based / inflation-indexed).
+- Depending on the bond type, profit may be treated as paid out or realised at maturity.
+- Tax is applied as **19%** unless **IKE** is enabled.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+Core logic lives in: `src/engine/bondCalculator.ts`
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## Development
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+### Requirements
+- Node.js (recommended: LTS)
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
-
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
-
-## Security hardening for production
-
-This app is prepared to run without external fonts (system font stack only), which is the safest option for both privacy and licensing risk.
-
-For deployment (for example on `https://obligacje.cytr.us`), set these HTTP response headers on the server/CDN:
-
-- `Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests`
-- `Strict-Transport-Security: max-age=31536000; includeSubDomains; preload`
-- `X-Content-Type-Options: nosniff`
-- `Referrer-Policy: strict-origin-when-cross-origin`
-- `Permissions-Policy: camera=(), microphone=(), geolocation=()`
-- `X-Frame-Options: DENY`
-
-Notes:
-
-- `frame-ancestors 'none'` and `X-Frame-Options: DENY` match the requirement that the app must not be embeddable in iframe.
-- Set CSP as an HTTP response header in production. Do not enforce CSP via `meta` in local development, because it can break Vite HMR.
+### Run locally
+```bash
+npm install
+npm run dev
